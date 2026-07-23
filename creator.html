@@ -1,0 +1,248 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAST NOODLES CREATOR WORLDWIDE FIXED - Publish Edit Upload Show</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>body{background:#080a12;color:white;font-family:system-ui}</style>
+</head>
+<body class="min-h-screen">
+<!-- HEADER ALWAYS SHOW -->
+<div class="bg-[#12131f] border-b border-white/10 p-4 flex justify-between items-center sticky top-0 z-50">
+<div class="flex items-center gap-2"><b style="color:#e50914">CAST</b><b class="ml-1">NOODLES</b><span class="text-white/60 text-sm ml-2">CREATOR WORLDWIDE FIXED</span><span class="text-[10px] bg-blue-500 text-white px-2 py-0.5 rounded-full font-bold ml-2">STREAMTAPE</span><span id="blobInfo" class="text-[10px] bg-white/10 px-2 py-0.5 rounded-full ml-2">Loading...</span></div>
+<div class="flex gap-2"><button onclick="window.open('index.html','_blank')" class="bg-white text-black px-3 py-2 rounded-full text-xs font-black">View Main</button><button onclick="forcePush()" class="bg-blue-500 text-white px-3 py-2 rounded-full text-xs font-black">Force Push Worldwide</button></div>
+</div>
+
+<!-- FIXED - CONTENT ALWAYS VISIBLE, NOT HIDDEN -->
+<div class="max-w-7xl mx-auto p-4">
+<div class="bg-blue-500/10 border border-blue-500/20 p-3 rounded-xl mb-4 text-xs">
+<b class="text-blue-400">🌍 FIXED - Publish/Edit/Upload Now Show!</b> If black screen before, na JS crash. This fixed version show form even if offline! Streamtape = Worldwide. Upload → Publish → Send https://sonivalopez-hue.github.io/CastNoodles/ to friends → They see worldwide!
+</div>
+
+<div class="grid lg:grid-cols-3 gap-6">
+<!-- LEFT - UPLOAD FORM - ALWAYS VISIBLE -->
+<div class="lg:col-span-1 bg-[#151821] rounded-2xl p-5 border border-white/10">
+<h2 class="font-black mb-4 text-sm"><i class="fa fa-upload mr-2 text-blue-400"></i>PUBLISH - EDIT - UPLOAD - FIXED SHOW!</h2>
+
+<div class="flex gap-2 mb-3">
+<button id="typeMovieBtn" onclick="setType('movie')" class="flex-1 py-2 rounded-full text-xs font-bold bg-white text-black cursor-pointer">Movie</button>
+<button id="typeSeriesBtn" onclick="setType('series')" class="flex-1 py-2 rounded-full text-xs bg-white/10 cursor-pointer">Series</button>
+</div>
+
+<p class="text-[10px] text-white/60 mb-1">TITLE *</p>
+<input id="title" placeholder="Title e.g Cast Noodles Drama Worldwide" class="w-full bg-black border border-white/10 rounded-full px-4 py-3 mb-3 text-sm outline-none focus:border-blue-500">
+
+<div class="flex gap-2 mb-3">
+<div class="w-1/2"><p class="text-[10px] text-white/60 mb-1">YEAR</p><input id="year" placeholder="2024" class="w-full bg-black border border-white/10 rounded-full px-4 py-3 text-sm outline-none"></div>
+<div class="w-1/2"><p class="text-[10px] text-white/60 mb-1">GENRE</p><select id="genre" class="w-full bg-black border border-white/10 rounded-full px-4 py-3 text-sm"><option>Action</option><option>Nollywood</option><option>Comedy</option><option>Cooking</option><option>Cast Noodles</option><option>Drama</option></select></div>
+</div>
+
+<p class="text-[10px] text-white/60 mb-1">DESCRIPTION</p>
+<textarea id="desc" placeholder="Description..." class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 mb-3 text-sm h-20 outline-none"></textarea>
+
+<div class="bg-black/40 p-3 rounded-xl border border-white/10 mb-3">
+<p class="text-[10px] text-white/60 mb-2 font-black">🎨 POSTER * UPLOAD - REQUIRED</p>
+<input id="posterFile" type="file" accept="image/*" class="w-full text-xs mb-2 cursor-pointer">
+<div id="posterPreview" class="hidden mt-2"><img id="posterImg" class="w-full h-40 object-cover rounded-xl border-2 border-blue-500"><p class="text-[10px] text-green-400 mt-1">✅ Poster Ready!</p></div>
+</div>
+
+<div class="bg-blue-500/10 p-3 rounded-xl border border-blue-500/20 mb-3">
+<p class="text-[10px] text-blue-300 font-black mb-1">🌍 STREAMTAPE LINK * Worldwide Permanent - REQUIRED</p>
+<input id="videoLink" placeholder="https://streamtape.com/e/xxxxxxx - Worldwide link" class="w-full bg-black border border-white/10 rounded-full px-3 py-3 text-xs outline-none focus:border-blue-500">
+<div id="linkCheck" class="hidden mt-2 text-[10px] p-2 rounded"></div>
+<p class="text-[9px] text-white/40 mt-2">Go streamtape.com → Upload video → Copy link /e/xxxx → Paste here. Friends worldwide see when you send CastNoodles link!</p>
+</div>
+
+<div id="seriesBox" class="hidden bg-black/40 p-3 rounded-xl border border-white/10 mb-3">
+<p class="text-[10px] text-white/60 mb-2 font-bold">SERIES Episodes</p>
+<div class="flex gap-2 mb-2"><input id="epTitle" placeholder="Episode 1" class="flex-1 bg-[#0f121e] border border-white/10 rounded-full px-3 py-2 text-xs"><input id="epLink" placeholder="Streamtape link" class="flex-1 bg-[#0f121e] border border-white/10 rounded-full px-3 py-2 text-xs"></div>
+<button onclick="addEp()" class="w-full bg-white/10 py-2 rounded-full text-xs cursor-pointer">+ Add Episode</button>
+<div id="epList" class="mt-2 space-y-1"></div>
+</div>
+
+<div class="grid grid-cols-2 gap-2 mb-4">
+<label class="bg-green-500/10 border-2 border-green-500/30 p-3 rounded-xl cursor-pointer flex gap-2"><input id="freeCheck" type="radio" name="vip" checked onchange="toggleVip()" class="cursor-pointer"><div><p class="text-xs font-black text-green-400">FREE</p><p class="text-[10px] text-white/60">Watch free worldwide</p></div></label>
+<label class="bg-yellow-400/10 border-2 border-yellow-500/20 p-3 rounded-xl cursor-pointer flex gap-2"><input id="vipCheck" type="radio" name="vip" onchange="toggleVip()" class="cursor-pointer"><div><p class="text-xs font-black text-yellow-400">VIP PAY</p><p class="text-[10px] text-white/60">Pay before watch worldwide</p></div></label>
+</div>
+
+<div id="vipHint" class="bg-green-500/10 border border-green-500/20 p-2 rounded-lg mb-3 text-[11px] text-green-300">✅ FREE: Watch free worldwide!</div>
+
+<button id="publishBtn" onclick="publish()" class="w-full bg-gradient-to-r from-blue-500 to-green-500 text-white py-3 rounded-full font-black cursor-pointer hover:scale-[1.02] active:scale-95 transition"><i class="fa fa-globe mr-2"></i>PUBLISH WORLDWIDE</button>
+<p class="text-[9px] text-white/30 mt-2 text-center">Fixed: Publish / Edit / Upload must show! If blank before, now fixed!</p>
+</div>
+
+<!-- RIGHT - LIVE LIST WITH EDIT -->
+<div class="lg:col-span-2">
+<div class="bg-[#151821] rounded-2xl p-5 border border-white/10">
+<div class="flex justify-between items-center mb-4"><h3 class="font-black text-sm">Live Worldwide - EDIT & DELETE Show Fixed!</h3><span id="count" class="text-xs bg-blue-500 text-white px-3 py-1 rounded-full font-bold">0 worldwide</span></div>
+<div id="movieList" class="space-y-2 max-h-[700px] overflow-auto">
+<p class="text-white/30 text-xs text-center py-12">Loading... If you see this, form above must show Publish / Upload! If not, clear cache and reload.<br><br>FIXED: If old creator show black screen, replace with this fixed code!</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="toast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-white text-black px-6 py-3 rounded-full font-bold text-sm z-50"></div>
+
+<script>
+// FIXED - WRAP EVERYTHING IN TRY/CATCH, SHOW FORM EVEN IF ERROR
+console.log('FIXED Creator Loading - Publish/Edit/Upload Show');
+var blobId = localStorage.getItem('castnoodles_worldwide_blobId') || "1400000000000000001";
+var allMovies = []; var posterBase64 = ""; var currentType = 'movie'; var episodes = [];
+
+function setType(t){
+  try{
+    currentType=t;
+    var mBtn=document.getElementById('typeMovieBtn');
+    var sBtn=document.getElementById('typeSeriesBtn');
+    var box=document.getElementById('seriesBox');
+    if(mBtn) mBtn.className=t=='movie'?'flex-1 py-2 rounded-full text-xs font-bold bg-white text-black cursor-pointer':'flex-1 py-2 rounded-full text-xs bg-white/10 cursor-pointer';
+    if(sBtn) sBtn.className=t=='series'?'flex-1 py-2 rounded-full text-xs font-bold bg-white text-black cursor-pointer':'flex-1 py-2 rounded-full text-xs bg-white/10 cursor-pointer';
+    if(box) box.classList.toggle('hidden', t!='series');
+  }catch(e){console.log(e);}
+}
+function toggleVip(){
+  try{
+    var isVip=document.getElementById('vipCheck')&&document.getElementById('vipCheck').checked;
+    var hint=document.getElementById('vipHint');
+    if(!hint) return;
+    if(isVip){hint.className='bg-yellow-400/10 border border-yellow-500/20 p-2 rounded-lg mb-3 text-[11px] text-yellow-300'; hint.innerText='👑 VIP PAY: Pay before watch worldwide!';}
+    else {hint.className='bg-green-500/10 border border-green-500/20 p-2 rounded-lg mb-3 text-[11px] text-green-300'; hint.innerText='✅ FREE: Watch free worldwide!';}
+  }catch(e){}
+}
+function addEp(){
+  try{
+    var tEl=document.getElementById('epTitle'); var lEl=document.getElementById('epLink');
+    var t=tEl?tEl.value.trim():'Episode '+(episodes.length+1); var l=lEl?lEl.value.trim():'';
+    if(!l){toast('Paste Streamtape link');return;}
+    episodes.push({title:t, video:l}); if(tEl) tEl.value=''; if(lEl) lEl.value=''; renderEpisodes();
+  }catch(e){}
+}
+function renderEpisodes(){
+  try{
+    var el=document.getElementById('epList'); if(!el) return;
+    el.innerHTML=episodes.map((e,i)=>'<div class="bg-black/40 p-2 rounded flex justify-between text-xs"><span>'+e.title+'</span><button onclick="episodes.splice('+i+',1);renderEpisodes()" class="text-red-400">Del</button></div>').join('');
+  }catch(e){}
+}
+async function init(){
+  try{
+    var blobEl=document.getElementById('blobInfo'); if(blobEl) blobEl.innerText='Blob: '+blobId.slice(-6)+' | FIXED Publish/Edit/Upload Show';
+    await load(); toggleVip();
+  }catch(e){console.log('init error',e); renderList();}
+}
+async function load(){
+  try{
+    var res=await fetch('https://jsonblob.com/api/jsonBlob/'+blobId);
+    if(res.ok){var data=await res.json(); if(Array.isArray(data)) allMovies=data;}
+  }catch(e){console.log('load error',e);}
+  renderList();
+}
+async function save(){
+  try{
+    await fetch('https://jsonblob.com/api/jsonBlob/'+blobId,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(allMovies)});
+    localStorage.setItem('castnoodles_worldwide_backup',JSON.stringify(allMovies));
+  }catch(e){localStorage.setItem('castnoodles_worldwide_backup',JSON.stringify(allMovies));}
+}
+async function forcePush(){
+  if(!confirm('Force push '+allMovies.length+' worldwide? Friends see worldwide!'))return;
+  try{
+    var res=await fetch('https://jsonblob.com/api/jsonBlob',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(allMovies)});
+    var loc=res.headers.get('location')||res.headers.get('Location');
+    if(loc){var id=loc.split('/').pop(); localStorage.setItem('castnoodles_worldwide_blobId',id); blobId=id; var el=document.getElementById('blobInfo'); if(el) el.innerText='Blob: '+id.slice(-6)+' Fixed'; toast('Force pushed worldwide '+id);}
+  }catch(e){toast('Error '+e);}
+}
+function setupListeners(){
+  try{
+    var posterInput=document.getElementById('posterFile');
+    if(posterInput){
+      posterInput.addEventListener('change', function(e){
+        try{
+          var f=e.target.files[0]; if(!f) return;
+          var r=new FileReader();
+          r.onload=function(ev){
+            var img=new Image();
+            img.onload=function(){
+              var c=document.createElement('canvas'); var maxW=400; var scale=maxW/img.width; c.width=maxW; c.height=img.height*scale;
+              c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+              posterBase64=c.toDataURL('image/jpeg',0.6);
+              var pImg=document.getElementById('posterImg'); var pPrev=document.getElementById('posterPreview');
+              if(pImg) pImg.src=posterBase64; if(pPrev) pPrev.classList.remove('hidden');
+            };
+            img.src=ev.target.result;
+          };
+          r.readAsDataURL(f);
+        }catch(e){}
+      });
+    }
+    var vLink=document.getElementById('videoLink');
+    if(vLink){
+      vLink.addEventListener('input', function(e){
+        try{
+          var v=e.target.value.trim(); var el=document.getElementById('linkCheck'); if(!el) return;
+          if(!v){el.classList.add('hidden');return;}
+          el.classList.remove('hidden');
+          if(v.includes('streamtape')){el.innerText='✅ Streamtape Worldwide Fixed!'; el.className='text-[10px] mt-2 p-2 rounded bg-blue-500/20 text-blue-300';}
+          else if(v.startsWith('blob:')){el.innerText='❌ blob expire! Use Streamtape!'; el.className='text-[10px] mt-2 p-2 rounded bg-red-500/20 text-red-300';}
+          else {el.innerText='✅ Good for worldwide!'; el.className='text-[10px] mt-2 p-2 rounded bg-green-500/20 text-green-300';}
+        }catch(e){}
+      });
+    }
+  }catch(e){}
+}
+function renderList(){
+  try{
+    var countEl=document.getElementById('count');
+    if(countEl) countEl.innerText=allMovies.length+' worldwide • '+allMovies.filter(m=>!m.vip).length+' Free • '+allMovies.filter(m=>m.vip).length+' VIP • Fixed';
+    var listEl=document.getElementById('movieList'); if(!listEl) return;
+    if(allMovies.length==0){
+      listEl.innerHTML='<div class="text-center py-12 bg-black/20 rounded-xl"><p class="font-bold">No videos yet</p><p class="text-xs text-white/40 mt-2">FIXED: Publish/Edit/Upload now show above! Upload poster + Streamtape link + Publish!</p><p class="text-xs text-blue-400 mt-2">If old creator blank, replace with this fixed code and clear browser cache!</p></div>';
+      return;
+    }
+    listEl.innerHTML=allMovies.map((m,i)=>{
+      var badge=m.vip?'<span class="bg-yellow-400 text-black text-[9px] px-2 py-0.5 rounded-full font-black ml-1">VIP PAY WORLDWIDE</span>':'<span class="bg-green-500 text-black text-[9px] px-2 py-0.5 rounded-full font-black ml-1">FREE WORLDWIDE</span>';
+      var st=m.video&&m.video.includes('streamtape')?'<span class="bg-blue-500 text-white text-[8px] px-2 py-0.5 rounded-full ml-1">STREAMTAPE</span>':'';
+      return '<div class="bg-black/40 p-3 rounded-xl flex gap-3"><div class="w-16 h-16 rounded-lg overflow-hidden bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center font-black text-xl">'+(m.poster?'<img src="'+m.poster+'" class="w-full h-full object-cover">':m.title[0])+'</div><div class="flex-1"><p class="font-bold text-sm">'+m.title+' '+badge+st+'</p><p class="text-xs text-white/50">'+(m.year||'2024')+' • '+(m.genre||'Worldwide')+'</p></div><div class="flex flex-col gap-1"><button onclick="editMovie('+i+')" class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-[10px] cursor-pointer">Edit</button><button onclick="delMovie('+i+')" class="bg-red-500/20 text-red-300 px-3 py-1 rounded-full text-[10px] cursor-pointer">Del</button></div></div>';
+    }).join('');
+  }catch(e){console.log('renderList error',e);}
+}
+function editMovie(i){
+  try{
+    var m=allMovies[i]; if(!m) return;
+    var tEl=document.getElementById('title'); if(tEl) tEl.value=m.title;
+    var yEl=document.getElementById('year'); if(yEl) yEl.value=m.year||'';
+    var gEl=document.getElementById('genre'); if(gEl) gEl.value=m.genre||'Action';
+    var dEl=document.getElementById('desc'); if(dEl) dEl.value=m.desc||'';
+    var vEl=document.getElementById('videoLink'); if(vEl) vEl.value=m.video||'';
+    var freeEl=document.getElementById('freeCheck'); var vipEl=document.getElementById('vipCheck');
+    if(freeEl) freeEl.checked=!m.vip; if(vipEl) vipEl.checked=m.vip;
+    posterBase64=m.poster; var pImg=document.getElementById('posterImg'); var pPrev=document.getElementById('posterPreview');
+    if(pImg) pImg.src=posterBase64; if(pPrev) pPrev.classList.remove('hidden');
+    toggleVip();
+    if(m.type=='series'){setType('series'); episodes=m.episodes||[]; renderEpisodes();}
+    allMovies.splice(i,1); save(); renderList(); toast('Editing - Publish again!');
+  }catch(e){}
+}
+async function publish(){
+  try{
+    var title=document.getElementById('title')?document.getElementById('title').value.trim():'';
+    var year=document.getElementById('year')?document.getElementById('year').value.trim()||'2024':'2024';
+    var genre=document.getElementById('genre')?document.getElementById('genre').value:'Action';
+    var desc=document.getElementById('desc')?document.getElementById('desc').value.trim():'';
+    var videoLink=document.getElementById('videoLink')?document.getElementById('videoLink').value.trim():'';
+    var isVip=document.getElementById('vipCheck')?document.getElementById('vipCheck').checked:false;
+    if(!title){toast('Enter Title');return;}
+    if(!posterBase64){toast('Upload Poster - Required');return;}
+    if(currentType=='movie'&&!videoLink){toast('Paste Streamtape link');return;}
+    if(currentType=='series'&&episodes.length==0){toast('Add episodes');return;}
+    if(videoLink&&videoLink.startsWith('blob:')){toast('Use Streamtape, not blob!');return;}
+    var btn=document.getElementById('publishBtn'); if(btn){btn.disabled=true; btn.innerText='Publishing...';}
+    var newMovie={id:Date.now(), title:title, year:year, genre:genre, desc:desc, type:currentType, poster:posterBase64, video:videoLink, episodes:currentType=='series'?episodes:[], vip:isVip};
+    allMovies.unshift(newMovie); await save(); toast((isVip?'VIP PAY Worldwide':'FREE Worldwide')+' Published! Friends see worldwide!'); renderList();
+    var tEl=document.getElementById('title'); if(tEl) tEl.value=''; var yEl=document.getElementById('year'); if(yEl) yEl.value=''; var dEl=document.getElementById('desc'); if(dEl) dEl.value=''; var vEl=document.getElementById('videoLink'); if(vEl) vEl.value=''; posterBase64=''; var pPrev=document.getElementById('posterPreview'); if(pPrev) pPrev.classList.add('hidden'); episodes=[]; renderEpisodes();
+    if(btn){btn.disabled=false; btn.innerText='PUBLISH WORLDWIDE';}
+  }catch(e){console.log('publish error',e); toast('Error '+e); var btn=document.getElementById('publishBtn'); if(btn){btn.disabled=false; btn.innerText='PUBLISH WORLDWIDE';}}
+}
+function delMovie(i){if(confirm('Delete? Friends will no longer see worldwide!')){allMovies.splice(i,1); save(); renderList();}}
+function toast(m){try{var t=document.getElementById('toast'); if(!t) return; t.innerText=m; t.classList.remove('hidden'); setTimeout(function(){t.classList.add('hidden');},4000);}catch(e){}}
+window.onload=function(){setupListeners(); init();};
+</script>
+</body></html>
