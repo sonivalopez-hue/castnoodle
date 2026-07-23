@@ -1,0 +1,31 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAST NOODLES CREATOR - Separate Repo - No Flix Link</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="background:#080a12;color:white" class="min-h-screen">
+<div class="bg-[#12131f] border-b border-white/10 p-4 flex justify-between items-center sticky top-0 z-40">
+<div class="flex items-center gap-2"><b class="text-white">CAST</b><b style="color:#e50914">NOODLES</b><span class="text-white/60 text-sm">CREATOR SEPARATE REPO</span><span id="blobInfo" class="text-[10px] ml-2 px-2 py-0.5 rounded-full bg-white/10">Loading...</span></div>
+<div class="flex gap-2"><button onclick="window.open('index.html','_blank')" class="bg-white text-black px-4 py-2 rounded-full text-xs font-black">View Main Separate</button><button onclick="forcePush()" class="bg-yellow-400 text-black px-4 py-2 rounded-full text-xs font-black">Force Push</button></div>
+</div>
+<div class="max-w-7xl mx-auto p-4">
+<div class="bg-[#e50914]/20 border border-[#e50914]/30 p-4 rounded-2xl mb-6 text-xs"><b class="text-[#e50914]">SEPARATE REPO:</b> https://sonivalopez-hue.github.io/CastNoodles/ | https://sonivalopez-hue.github.io/CastNoodles/creator.html | NOT Flix repo! | Free = Watch Free, VIP = Pay Before Watch</div>
+<div class="bg-[#151821] rounded-2xl p-5 border border-white/10">
+<h2 class="font-black mb-4">Upload - Separate Repo - Choose Free or VIP Pay</h2>
+<input id="title" placeholder="Title * e.g Noodles Drama" class="w-full bg-black border border-white/10 rounded-full px-4 py-3 mb-2 text-sm">
+<input id="posterFile" type="file" accept="image/*" class="w-full text-xs mb-2"><div id="posterPreview" class="hidden"><img id="posterImg" class="w-full h-40 object-cover rounded-xl mb-2"></div>
+<input id="videoLink" placeholder="https:// permanent link - @getpubliclink_bot" class="w-full bg-black border border-white/10 rounded-full px-4 py-3 text-xs mb-3">
+<div class="grid grid-cols-2 gap-2 mb-4">
+<label class="bg-green-500/10 border-2 border-green-500/30 p-3 rounded-xl cursor-pointer flex gap-2"><input id="freeCheck" type="radio" name="vip" checked><div><p class="text-xs font-black text-green-400">FREE - Ordinary Watch Free</p></div></label>
+<label class="bg-yellow-400/10 border-2 border-yellow-500/20 p-3 rounded-xl cursor-pointer flex gap-2"><input id="vipCheck" type="radio" name="vip"><div><p class="text-xs font-black text-yellow-400">VIP PAY - Pay Before Watch</p></div></label>
+</div>
+<button id="publishBtn" onclick="publish()" class="w-full bg-[#e50914] py-3 rounded-full font-black">Publish to Separate Repo CastNoodles</button>
+</div>
+<div id="movieList" class="mt-6 space-y-2"></div>
+</div>
+<div id="toast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-white text-black px-6 py-3 rounded-full font-bold z-50"></div>
+<script>
+let blobId=localStorage.getItem('castnoodles_separate_blobId')||"1400000000000000001"; let allMovies=[]; let posterBase64="";
+async function load(){try{let r=await fetch('https://jsonblob.com/api/jsonBlob/'+blobId); if(r.ok){let d=await r.json(); if(Array.isArray(d)) allMovies=d; document.getElementById('blobInfo').innerText='Blob: '+blobId.slice(-6)+' Separate';}}catch(e){} render();}
+async function save(){try{await fetch('https://jsonblob.com/api/jsonBlob/'+blobId,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(allMovies)}); localStorage.setItem('castnoodles_separate_backup',JSON.stringify(allMovies));}catch(e){}}
+document.getElementById('posterFile').addEventListener('change',e=>{let f=e.target.files[0]; if(!f) return; let r=new FileReader(); r.onload=ev=>{let img=new Image(); img.onload=()=>{let c=document.createElement('canvas'); c.width=400; c.height=img.height*400/img.width; c.getContext('2d').drawImage(img,0,0,c.width,c.height); posterBase64=c
