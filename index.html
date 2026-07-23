@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAST NOODLES - Separate Repo - Free + VIP Like Flixlit</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="background:#080a12;color:white" class="min-h-screen">
+<div class="sticky top-0 z-30 bg-[#0f121e] border-b border-white/10 p-3 flex justify-between items-center">
+<div class="flex items-center gap-2"><b style="color:#e50914" class="text-xl">CAST</b><b class="text-xl">NOODLES</b> <span class="text-[9px] bg-[#e50914] px-2 py-0.5 rounded-full">SEPARATE REPO</span> <span class="text-[9px] bg-green-500 text-black px-2 py-0.5 rounded-full font-bold">FREE</span><span class="text-[9px] bg-yellow-400 text-black px-2 py-0.5 rounded-full font-black">VIP PAY</span></div>
+<div class="flex gap-2"><input id="search" oninput="render()" placeholder="Search..." class="bg-black border border-white/10 rounded-full px-4 py-2 text-xs w-28 md:w-48"><button onclick="openSub()" class="bg-[#e50914] px-5 py-2 rounded-full text-xs font-bold">VIP SUB</button></div>
+</div>
+<div class="bg-[#e50914]/20 text-center py-2 text-[11px]">🍜 CAST NOODLES - Separate Repo - Free Watch Free - VIP Pay Before Watch & Download - Kuda 3003350273 - NOT Flix Repo</div>
+<div class="p-4 max-w-7xl mx-auto">
+<div class="bg-gradient-to-r from-[#e50914] to-orange-600 rounded-2xl p-8 mb-6">
+<h1 class="text-4xl font-black">CAST NOODLES</h1>
+<p class="text-sm mt-2">Separate Repo - Ordinary Free Watch Free - VIP Pay Before Watch & Download - Like Flixlit</p>
+<p id="heroPrice" class="text-xs mt-2 bg-black/30 inline-block px-3 py-1 rounded-full"></p>
+<div class="mt-4 flex gap-2"><button onclick="filterType('all')" id="fAll" class="px-5 py-2 rounded-full text-xs bg-white text-black font-bold">All</button><button onclick="filterType('free')" id="fFree" class="px-5 py-2 rounded-full text-xs bg-green-500 text-black font-bold">Free</button><button onclick="filterType('vip')" id="fVip" class="px-5 py-2 rounded-full text-xs bg-yellow-400 text-black font-black">VIP Pay</button></div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="grid"></div>
+<p id="status" class="text-center text-xs text-white/30 mt-6">Loading Cast Noodles Separate Repo...</p>
+</div>
+<div id="player" class="hidden fixed inset-0 bg-black z-40 p-4 overflow-auto">
+<button onclick="closePlayer()" class="bg-white/10 px-5 py-2 rounded-full text-sm mb-4">← Back</button>
+<video id="vid" controls class="w-full aspect-video bg-black rounded-2xl"></video>
+<h2 id="ptitle" class="text-xl font-black mt-4"></h2><p id="pdesc" class="text-sm text-white/60"></p>
+<a id="down" href="#" download class="inline-block mt-4 bg-[#e50914] px-6 py-3 rounded-full font-black text-sm">Download</a>
+</div>
+<div id="sub" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+<div class="bg-[#141824] rounded-2xl w-full max-w-md p-5">
+<div class="flex justify-between mb-4"><b>Subscribe VIP - Separate Repo</b><button onclick="closeSub()" class="bg-white/10 w-8 h-8 rounded-full">X</button></div>
+<div class="bg-[#1e2535] rounded-xl p-4 mb-4"><p id="kudaNameDisplay" class="font-bold">CAST NOODLES</p><p id="kudaNumberDisplay" class="font-mono text-xl">3003350273</p><p id="priceDisplay" class="text-xs mt-2"></p><p class="text-[10px] text-white/50 mt-2">Separate Repo: https://sonivalopez-hue.github.io/CastNoodles/</p></div>
+<input id="code" placeholder="VIP Code e.g CAST-XXXX" class="w-full bg-black border border-white/10 rounded-full px-4 py-3 mb-2 text-sm">
+<button onclick="activate()" class="w-full bg-[#e50914] py-3 rounded-full font-bold mb-2">Activate VIP</button>
+<a id="waLink" href="#" target="_blank" class="block bg-green-600 py-3 rounded-full font-bold text-center text-sm mb-2">WhatsApp Proof</a>
+<button onclick="quick()" class="w-full bg-white/10 py-3 rounded-full text-xs">Test 7 Days</button>
+</div>
+</div>
+<div id="toast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-white text-black px-6 py-3 rounded-full font-bold text-sm z-50"></div>
+<script>
+let blobId=localStorage.getItem('castnoodles_separate_blobId')||"1400000000000000001";
+let movies=[]; let currentFilter='all';
+let settings=JSON.parse(localStorage.getItem('castnoodles_settings')||'null')||{kudaName:'CAST NOODLES',kudaNumber:'3003350273',whatsapp:'07063226816',daily:500,weekly:2000,monthly:5000};
+function openSub(){document.getElementById('sub').classList.remove('hidden');}
+function closeSub(){document.getElementById('sub').classList.add('hidden');}
+function closePlayer(){document.getElementById('player').classList.add('hidden'); document.getElementById('vid').pause();}
+async function loadFromBlob(){
+ try{let res=await fetch('https://jsonblob.com/api/jsonBlob/'+blobId); if(res.status==404){movies=JSON.parse(localStorage.getItem('castnoodles_separate_backup')||'[]'); render(); return;} let data=res.ok?await res.json():[]; movies=Array.isArray(data)?data:[]; localStorage.setItem('castnoodles_separate_backup',JSON.stringify(movies)); render();}catch(e){movies=JSON.parse(localStorage.getItem('castnoodles_separate_backup')||'[]'); render();}
+}
+function filterType(t){
+ currentFilter=t;
+ document.getElementById('fAll').className=t=='all'?'px-5 py-2 rounded-full text-xs bg-white text-black font-bold':'px-5 py-2 rounded-full text-xs bg-white/10';
+ document.getElementById('fFree').className=t=='free'?'px-5 py-2 rounded-full text-xs bg-green-500 text-black font-bold':'px-5 py-2 rounded-full text-xs bg-white/10';
+ document.getElementById('fVip').className=t=='vip'?'px-5 py-2 rounded-full text-xs bg-yellow-400 text-black font-black':'px-5 py-2 rounded-full text-xs bg-white/10';
+ render();
+}
+function render(){
+ let g=document.getElementById('grid'); g.innerHTML='';
+ let q=document.getElementById('search').value.toLowerCase();
+ let filtered=movies.filter(m=>{if(!m||!m.title) return false; if(currentFilter=='free'&&m.vip) return false; if(currentFilter=='vip'&&!m.vip) return false; if(q&&!m.title.toLowerCase().includes(q)) return false; return true;});
+ document.getElementById('status').innerText=filtered.length+' videos - '+movies.filter(m=>!m.vip).length+' Free (Watch Free) - '+movies.filter(m=>m.vip).length+' VIP Pay (Pay Before Watch) - Separate Repo';
+ if(filtered.length==0){g.innerHTML='<div class="col-span-full text-center p-12 bg-[#151821] rounded-2xl"><p class="font-bold">No Cast Noodles yet - Separate Repo</p><p class="text-xs text-white/40 mt-2">Create repo CastNoodles with index.html and creator.html lowercase!</p><a href="creator.html" class="inline-block mt-4 bg-[#e50914] px-6 py-2 rounded-full text-xs font-bold">Open Creator</a></div>'; return;}
+ filtered.forEach(m=>{
+  let d=document.createElement('div'); d.className='bg-[#151821] rounded-xl overflow-hidden cursor-pointer border border-white/5 hover:border-[#e50914]/30';
+  let poster=m.poster?`<img src="${m.poster}" class="w-full h-full object-cover">`:`<div class="w-full h-full bg-gradient-to-br from-red-600 to-orange-600 flex items-center justify-center text-3xl font-black">${m.title[0]}</div>`;
+  let badge=m.vip?`<span class="absolute top-2 left-2 bg-yellow-400 text-black text-[9px] px-2 py-1 rounded-full font-black">VIP PAY</span>`:`<span class="absolute top-2 left-2 bg-green-500 text-black text-[9px] px-2 py-1 rounded-full font-black">FREE</span>`;
+  d.innerHTML=`<div class="h-60 relative bg-black overflow-hidden">${poster}${badge}</div><div class="p-3"><p class="font-bold text-sm truncate">${m.title}</p><p class="text-xs text-white/50">${m.genre||'Cast'} - ${m.vip?'VIP Pay':'Free Watch Free'}</p></div>`;
+  d.onclick=()=>playMovie(m); g.appendChild(d);
+ });
+}
+function playMovie(m){
+ if(!m.vip){ document.getElementById('player').classList.remove('hidden'); document.getElementById('ptitle').innerText=m.title+' 💚 Free'; document.getElementById('pdesc').innerText=m.desc||'Free - Watch for free - Separate Repo'; document.getElementById('vid').src=m.video; document.getElementById('down').href=m.video; document.getElementById('vid').play().catch(()=>{}); return;}
+ if(!isSub()){ openSub(); return; }
+ document.getElementById('player').classList.remove('hidden'); document.getElementById('ptitle').innerText=m.title+' 👑 VIP Pay'; document.getElementById('pdesc').innerText=m.desc||'VIP - Pay before watch & download - Separate Repo'; document.getElementById('vid').src=m.video; document.getElementById('down').href=m.video; document.getElementById('vid').play().catch(()=>{});
+}
+function isSub(){let e=localStorage.getItem('castnoodles_separate_sub'); return e&&new Date(e)>new Date();}
+function toast(msg){let t=document.getElementById('toast'); t.innerText=msg; t.classList.remove('hidden'); setTimeout(()=>t.classList.add('hidden'),3000);}
+function activate(){
+ let c=document.getElementById('code').value.toUpperCase().trim(); let days=0;
+ if(c=='DAILY500') days=1; else if(c.startsWith('CAST-')||c.startsWith('NOODLES-')) days=7; else if(c=='CASTVIP') days=30;
+ let custom=JSON.parse(localStorage.getItem('castnoodles_codes')||'[]'); let found=custom.find(x=>x.code.toUpperCase()==c&&new Date(x.expires)>new Date()); if(found) days=found.days;
+ if(days){let d=new Date(); d.setDate(d.getDate()+days); localStorage.setItem('castnoodles_separate_sub',d.toISOString()); closeSub(); toast('VIP Activated '+days+' days - Separate Repo');} else toast('Invalid code');
+}
+function quick(){let d=new Date(); d.setDate(d.getDate()+7); localStorage.setItem('castnoodles_separate_sub',d.toISOString()); closeSub(); toast('Test 7 days - Separate Repo');}
+function applySettings(){
+ document.getElementById('kudaNameDisplay').innerText=settings.kudaName;
+ document.getElementById('kudaNumberDisplay').innerText=settings.kudaNumber;
+ document.getElementById('priceDisplay').innerText='Daily ₦'+settings.daily+' | Weekly ₦'+settings.weekly+' | Monthly ₦'+settings.monthly+' - Separate Repo';
+ document.getElementById('heroPrice').innerText='Free: Watch Free | VIP: Daily ₦'+settings.daily+' Weekly ₦'+settings.weekly+' Monthly ₦'+settings.monthly+' - Separate Repo https://sonivalopez-hue.github.io/CastNoodles/';
+ let wa=settings.whatsapp.replace(/[^0-9]/g,''); if(wa.startsWith('0')) wa='234'+wa.slice(1);
+ document.getElementById('waLink').href='https://wa.me/'+wa+'?text=Hi%20I%20paid%20to%20Kuda%20'+settings.kudaNumber+'%20for%20CAST%20NOODLES%20Separate%20Repo%20VIP';
+}
+applySettings(); loadFromBlob();
+</script>
+</body></html>
